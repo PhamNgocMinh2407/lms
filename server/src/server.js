@@ -4,6 +4,7 @@ import {connectDB} from "./libs/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userroutes.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 
 dotenv.config();
@@ -14,9 +15,17 @@ console.log("-------------------------------");
 
 
 const app = express();
+
+
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:5173", // Cho phép Frontend Vite của bạn truy cập
+    credentials: true,               // Bắt buộc để trình duyệt chịu lưu Cookie (refreshToken) giống Postman
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(cookieParser());
 
 
