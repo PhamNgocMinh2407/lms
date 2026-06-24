@@ -17,11 +17,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         trim: true,
-        lowercase: true,    
+        lowercase: true,
     },
     DisplayName: {
         type: String,
-        required: true, 
+        required: true,
         trim: true,
     },
     avatarUrl: {
@@ -34,15 +34,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         maxlength: 500,
     },
-    phone:{
+    phone: {
         type: String,
         sparse: true,
     },
+    role: {
+        type: String,
+        enum: ["student", "admin", "hr", "ht", "tbm", "pdt", "teacher"],
+        default: "student"
+    }
 },
-{   
-     timestamps: true,
+    {
+        timestamps: true,
 
-}
+    }
 );
 
 const User = mongoose.model("User", userSchema);

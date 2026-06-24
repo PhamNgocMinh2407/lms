@@ -1,8 +1,7 @@
 import express from 'express';
-import { signIn,signup,signOut } from '../controllers/authcontrollers.js';
+import { signIn,signOut } from '../controllers/authcontrollers.js';
 const router = express.Router();
 
-router.post("/signup", signup);
 
 router.post("/signin", signIn);
 

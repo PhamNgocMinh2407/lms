@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import {connectDB} from "./libs/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userroutes.js";
 import cookieParser from "cookie-parser";
 
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 //public routes
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 // private routes
 
