@@ -1,4 +1,5 @@
-function authorize(...roles) {
+// Đổi thành export const ở đầu hàm để file userroutes.js có thể import { authorize } được
+export const authorize = (...roles) => {
     return (req, res, next) => {
         // Kiểm tra người dùng đã đăng nhập chưa
         if (!req.user) {
@@ -16,6 +17,4 @@ function authorize(...roles) {
 
         next();
     };
-}
-
-module.exports = { authorize };
+};

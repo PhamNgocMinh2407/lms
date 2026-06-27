@@ -20,11 +20,21 @@ export const signIn = async (req, res) => {
         }
 
         // 2. Tìm user trong database
-        const user = await User.findOne({ username });
+      const user = await User.findOne({
+            username,
+            isDeleted: false
+        });
         if (!user) {
             return res
                 .status(401)
                 .json({ message: "Tên đăng nhập hoặc mật khẩu không đúng" });
+        }
+
+     
+        if (!user.isActive) {
+            return res.status(403).json({
+                message: "Tài khoản đã bị khóa"
+            });
         }
 
         // 3. Kiểm tra mật khẩu
@@ -62,7 +72,7 @@ export const signIn = async (req, res) => {
 
         // 8. Trả thông tin về cho Client 
         return res.status(200).json({
-            message: `user ${user.DisplayName || user.username} đã đăng nhập thành công`, 
+            message: `user ${user.displayName || user.username} đã đăng nhập thành công`, 
             accessToken,
             userId: user._id,
             role: user.role // QUAN TRỌNG: Để Zustand và Route điều hướng hoạt động đúng

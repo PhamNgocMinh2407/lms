@@ -20,50 +20,64 @@ const seedUsers = async () => {
                 username: "student",
                 email: "student@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Student",
-                role: "student"
+                displayName: "Tài khoản Student",
+                role: "student",
+                isActive: true,
+                isDeleted: false
             },
             {
                 username: "admin",
                 email: "admin@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Admin",
-                role: "admin"
+                displayName: "Tài khoản Admin",
+                role: "admin",
+                isActive: true,
+                isDeleted: false
             },
             {
                 username: "hr",
                 email: "hr@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản HR",
-                role: "hr"
+                displayName: "Tài khoản HR",
+                role: "hr",
+                  isActive: true,
+                isDeleted: false
             },
             {
                 username: "ht",
                 email: "ht@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Hiệu trưởng",
-                role: "ht"
+                displayName: "Tài khoản Hiệu trưởng",
+                role: "ht",
+                  isActive: true,
+                isDeleted: false
             },
             {
                 username: "tbm",
                 email: "tbm@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Trưởng bộ môn",
-                role: "tbm"
+                displayName: "Tài khoản Trưởng bộ môn",
+                role: "tbm",
+                  isActive: true,
+                isDeleted: false
             },
             {
                 username: "pdt",
                 email: "pdt@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Phòng đào tạo",
-                role: "pdt"
+                displayName: "Tài khoản Phòng đào tạo",
+                role: "pdt",
+                  isActive: true,
+                isDeleted: false
             },
             {
                 username: "teacher",
                 email: "teacher@gmail.com",
                 hashedPassword,
-                DisplayName: "Tài khoản Giáo viên",
-                role: "teacher"
+                displayName: "Tài khoản Giáo viên",
+                role: "teacher",
+                  isActive: true,
+                isDeleted: false
             }
         ];
 

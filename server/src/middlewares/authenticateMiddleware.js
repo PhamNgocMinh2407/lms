@@ -6,9 +6,12 @@ import User from "../models/User.js";
 export const protectedRoute = (req, res, next) => {
   try {
     // lấy token từ header
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1]; // Bearer <token>
+    const authHeader = req.headers.authorization;
 
+    const token = authHeader?.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : null;
+   
     if (!token) {
       return res.status(401).json({ message: "Không tìm thấy access token" });
     }
@@ -17,7 +20,6 @@ export const protectedRoute = (req, res, next) => {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decodedUser) => {
       if (err) {
         console.error(err);
-
         return res
           .status(403)
           .json({ message: "Access token hết hạn hoặc không đúng" });

@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
     },
-    DisplayName: {
+    displayName: {
         type: String,
         required: true,
         trim: true,
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         maxlength: 500,
     },
-    phone: {
+    phone: {    
         type: String,
         sparse: true,
     },
@@ -42,8 +42,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["student", "admin", "hr", "ht", "tbm", "pdt", "teacher"],
         default: "student"
+    },
+    isActive: {
+    type: Boolean,
+    default: true
+    },
+
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
 },
+
     {
         timestamps: true,
 
