@@ -1,11 +1,10 @@
-import { ROLES } from "./roles";
-
 export const DASHBOARD_ROUTES = {
-  [ROLES.SUPER_ADMIN]: "/dashboard/super-admin",
-  [ROLES.ADMIN]: "/dashboard/admin",
-  [ROLES.HR]: "/dashboard/hr",
-  [ROLES.TRAINING]: "/dashboard/training",
-  [ROLES.HEAD_DEPARTMENT]: "/dashboard/head-department",
-  [ROLES.LECTURER]: "/dashboard/lecturer",
-  [ROLES.STUDENT]: "/dashboard/student",
+  admin: "/dashboard/admin",
+  student: "/dashboard/student",
+  hr: "/dashboard/hr",
+  pdt: "/dashboard/pdt",             // Phòng đào tạo (Đồng bộ với Backend)
+  tbm: "/dashboard/tbm",             // Trưởng bộ môn (Đồng bộ với Backend)
+  teacher: "/dashboard/teacher",     // Giảng viên (Đồng bộ với Backend)
+  ht: "/dashboard/ht",               // Hiệu trưởng (Đồng bộ với Backend)
+  "super-admin": "/dashboard/super-admin",
 };
