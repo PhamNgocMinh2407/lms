@@ -6,6 +6,14 @@ import userRoutes from "./routes/userroutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import hrRoutes from "./routes/hrRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
+import departmentRoutes from "./routes/departmentRoutes.js";
+import majorRoutes from "./routes/majorRoutes.js";
+import subjectRoutes from "./routes/subjectRoutes.js";
+import academicYearRoutes from "./routes/academicYearRoutes.js";
+import semesterRoutes from "./routes/semesterRoutes.js";
+import classRoutes from "./routes/classRoutes.js";
+import roomRoutes from "./routes/roomRoutes.js";
+import courseSectionRoutes from "./routes/courseSectionRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -41,8 +49,16 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/hr", hrRoutes);
+app.use("/api/hr", hrRoutes); 
 app.use("/api/faculties", facultyRoutes);
+app.use("/api/departments", departmentRoutes);
+app.use("/api/majors", majorRoutes);
+app.use("/api/subjects", subjectRoutes);
+app.use("/api/academic-years", academicYearRoutes);
+app.use("/api/semesters", semesterRoutes);
+app.use("/api/classes", classRoutes);
+app.use("/api/rooms", roomRoutes);
+app.use("/api/course-sections", courseSectionRoutes);
 
 // private routes
 
