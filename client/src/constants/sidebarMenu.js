@@ -2,203 +2,50 @@ import { ROLES } from "./roles";
 
 export const SIDEBAR_MENU = {
   [ROLES.SUPER_ADMIN]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/super-admin",
-    },
-    {
-      label: "Quản lý tài khoản",
-      path: "/users",
-    },
-    {
-      label: "Phân quyền",
-      path: "/permissions",
-    },
-    {
-      label: "Quản lý môn học",
-      path: "/subjects",
-    },
-    {
-      label: "Chương trình đào tạo",
-      path: "/curriculums",
-    },
-    {
-      label: "Quản lý lớp học",
-      path: "/classes",
-    },
-    {
-      label: "Quản lý giảng viên",
-      path: "/lecturers",
-    },
-    {
-      label: "Quản lý sinh viên",
-      path: "/students",
-    },
-    {
-      label: "Quản lý bài học",
-      path: "/lessons",
-    },
-    {
-      label: "Quản lý kiểm tra",
-      path: "/exams",
-    },
-    {
-      label: "Thống kê báo cáo",
-      path: "/reports",
-    },
-    {
-      label: "Nhật ký hệ thống",
-      path: "/system-logs",
-    },
+    { label: "Dashboard", path: "/dashboard/super-admin" },
+    { label: "Quản lý tài khoản", path: "/dashboard/super-admin" },
+    { label: "Báo cáo hệ thống", path: "/dashboard/super-admin" },
   ],
 
   [ROLES.ADMIN]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/admin",
-    },
-    {
-      label: "Quản lý tài khoản",
-      path: "/users",
-    },
-    {
-      label: "Phân quyền",
-      path: "/permissions",
-    },
-    {
-      label: "Cấu hình hệ thống",
-      path: "/settings",
-    },
-    {
-      label: "Backup / Restore",
-      path: "/backup",
-    },
+    { label: "Dashboard", path: "/dashboard/admin" },
+    { label: "Quản lý tài khoản", path: "/dashboard/admin#users" },
+    { label: "Tạo tài khoản", path: "/dashboard/admin#create-user" },
+    { label: "Phân bổ vai trò", path: "/dashboard/admin#roles" },
   ],
 
   [ROLES.HR]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/hr",
-    },
-    {
-      label: "Quản lý nhân sự",
-      path: "/employees",
-    },
-    {
-      label: "Quản lý sinh viên",
-      path: "/students",
-    },
-    {
-      label: "Tạo tài khoản",
-      path: "/accounts/create",
-    },
+    { label: "Dashboard", path: "/dashboard/hr" },
+    { label: "Nhân sự", path: "/dashboard/hr" },
+    { label: "Tạo tài khoản", path: "/dashboard/hr" },
+  ],
+
+  [ROLES.HT]: [
+    { label: "Dashboard", path: "/dashboard/ht" },
+    { label: "Báo cáo tổng quan", path: "/dashboard/ht" },
   ],
 
   [ROLES.TRAINING]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/training",
-    },
-    {
-      label: "Quản lý môn học",
-      path: "/subjects",
-    },
-    {
-      label: "Chương trình đào tạo",
-      path: "/curriculums",
-    },
-    {
-      label: "Quản lý lớp học",
-      path: "/classes",
-    },
-    {
-      label: "Đăng ký học phần",
-      path: "/enrollments",
-    },
-    {
-      label: "Báo cáo đào tạo",
-      path: "/training-reports",
-    },
+    { label: "Dashboard", path: "/dashboard/pdt" },
+    { label: "Môn học", path: "/dashboard/pdt" },
+    { label: "Chương trình đào tạo", path: "/dashboard/pdt" },
   ],
 
   [ROLES.HEAD_DEPARTMENT]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/head-department",
-    },
-    {
-      label: "Đề xuất môn học",
-      path: "/subject-proposals",
-    },
-    {
-      label: "Đề xuất lớp học",
-      path: "/class-proposals",
-    },
-    {
-      label: "Phân công giảng viên",
-      path: "/lecturer-assignments",
-    },
-    {
-      label: "Theo dõi bộ môn",
-      path: "/department-overview",
-    },
+    { label: "Dashboard", path: "/dashboard/tbm" },
+    { label: "Bộ môn", path: "/dashboard/tbm" },
+    { label: "Phân công giảng viên", path: "/dashboard/tbm" },
   ],
 
   [ROLES.LECTURER]: [
-    {
-      label: "Dashboard",
-      path: "/dashboard/lecturer",
-    },
-    {
-      label: "Lớp đang giảng dạy",
-      path: "/my-classes",
-    },
-    {
-      label: "Bài học",
-      path: "/lessons",
-    },
-    {
-      label: "Bài kiểm tra",
-      path: "/exams",
-    },
-    {
-      label: "Điểm số",
-      path: "/scores",
-    },
+    { label: "Dashboard", path: "/dashboard/teacher" },
+    { label: "Lớp giảng dạy", path: "/dashboard/teacher" },
+    { label: "Bài kiểm tra", path: "/dashboard/teacher" },
   ],
 
   [ROLES.STUDENT]: [
-    {
-      label: "Trang chủ",
-      path: "/dashboard/student",
-    },
-    {
-      label: "Môn học",
-      path: "/subjects",
-    },
-    {
-      label: "Đăng ký học phần",
-      path: "/enrollments",
-    },
-    {
-      label: "Bài học",
-      path: "/lessons",
-    },
-    {
-      label: "Bài kiểm tra",
-      path: "/exams",
-    },
-    {
-      label: "Điểm số",
-      path: "/scores",
-    },
-    {
-      label: "Lịch học",
-      path: "/schedule",
-    },
-    {
-      label: "Thông báo",
-      path: "/notifications",
-    },
+    { label: "Trang chủ", path: "/dashboard/student" },
+    { label: "Môn học", path: "/dashboard/student" },
+    { label: "Lịch học", path: "/dashboard/student" },
   ],
 };

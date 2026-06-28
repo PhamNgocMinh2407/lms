@@ -1,16 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import "./DashboardLayout.css";
 
 export default function DashboardLayout() {
   return (
-    <div className="flex">
+    <div className="dashboard-shell">
       <Sidebar />
 
-      <div className="flex-1">
+      <div className="dashboard-content">
         <Header />
 
-        <main className="p-6">
+        <main className="dashboard-main">
           <Outlet />
         </main>
       </div>

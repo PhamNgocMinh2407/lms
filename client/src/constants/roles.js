@@ -1,9 +1,10 @@
 export const ROLES = {
-  SUPER_ADMIN: "ROLE_SUPER_ADMIN",
-  ADMIN: "ROLE_ADMIN",
-  HR: "ROLE_HR",
-  TRAINING: "ROLE_TRAINING",
-  HEAD_DEPARTMENT: "ROLE_HEAD_DEPARTMENT",
-  LECTURER: "ROLE_LECTURER",
-  STUDENT: "ROLE_STUDENT",
+  SUPER_ADMIN: "super-admin",
+  ADMIN: "admin",
+  HR: "hr",
+  HT: "ht",
+  TRAINING: "pdt",
+  HEAD_DEPARTMENT: "tbm",
+  LECTURER: "teacher",
+  STUDENT: "student",
 };

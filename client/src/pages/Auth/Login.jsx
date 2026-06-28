@@ -30,7 +30,8 @@ export default function Login() {
       // (Giả sử backend trả về data.role dạng 'admin', 'student' trùng với key của ROLES)
       const loggedInUser = {
         id: data.userId || "real-id", 
-        name: data.message.split(" ") || username, // Lấy tên hiển thị từ message hoặc username
+        name: data.displayName || username,
+        username,
         role: data.role, // Lấy role thực tế từ database
       };
 
