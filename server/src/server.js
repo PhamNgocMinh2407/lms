@@ -14,6 +14,15 @@ import semesterRoutes from "./routes/semesterRoutes.js";
 import classRoutes from "./routes/classRoutes.js";
 import roomRoutes from "./routes/roomRoutes.js";
 import courseSectionRoutes from "./routes/courseSectionRoutes.js";
+import enrollmentRoutes from "./routes/enrollmentRoutes.js";
+import gradeRoutes from "./routes/gradeRoutes.js";
+import transcriptRoutes from "./routes/transcriptRoutes.js";
+import subjectProposalRoutes from "./routes/subjectProposalRoutes.js";
+import teacherRoutes from "./routes/teacherRoutes.js";
+import tbmRoutes from "./routes/tbmRoutes.js";
+import htRoutes from "./routes/htRoutes.js";
+import pdtRoutes from "./routes/pdtRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -59,6 +68,15 @@ app.use("/api/semesters", semesterRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/course-sections", courseSectionRoutes);
+app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/grades", gradeRoutes);
+app.use("/api/transcripts", transcriptRoutes);
+app.use("/api/subject-proposals", subjectProposalRoutes);
+app.use("/api/teachers", teacherRoutes);
+app.use("/api/tbms", tbmRoutes);
+app.use("/api/pdts", pdtRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/hts", htRoutes);
 
 // private routes
 
