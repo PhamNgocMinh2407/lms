@@ -2,6 +2,16 @@ import CourseSection from "../models/CourseSection.js";
 import Enrollment from "../models/Enrollment.js";
 import Grade from "../models/Grade.js";
 import SubjectProposal from "../models/SubjectProposal.js";
+import mongoose from "mongoose";
+import Attendance from "../models/Attendance.js";
+
+const normalizeDate = (dateValue) => {
+    const date = new Date(dateValue);
+
+    date.setHours(0, 0, 0, 0);
+
+    return date;
+};
 
 export const getMyCourseSections = async (req, res) => {
     try {
@@ -225,6 +235,148 @@ export const getMySubjectProposals = async (req, res) => {
 
     } catch (error) {
         console.error("getMySubjectProposals:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi hệ thống"
+        });
+    }
+};
+
+export const getMyAttendances = async (req, res) => {
+    try {
+        const teacherId = req.user.id || req.user._id;
+        const { courseSectionId, status, date } = req.query;
+
+        const courseSections = await CourseSection.find({
+            teacherId,
+            isDeleted: false
+        }).select("_id");
+
+        const courseSectionIds = courseSections.map((item) => item._id);
+        const allowedCourseSectionIds = courseSectionIds.map((id) =>
+            id.toString()
+        );
+
+        const filter = {
+            courseSectionId: {
+                $in: courseSectionIds
+            },
+            isDeleted: false
+        };
+
+        if (courseSectionId) {
+            if (!mongoose.Types.ObjectId.isValid(courseSectionId)) {
+                return res.status(400).json({
+                    success: false,
+                    message: "ID lớp học phần không hợp lệ"
+                });
+            }
+
+            if (!allowedCourseSectionIds.includes(courseSectionId)) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Bạn không có quyền xem điểm danh lớp học phần này"
+                });
+            }
+
+            filter.courseSectionId = courseSectionId;
+        }
+
+        if (status) {
+            filter.status = status;
+        }
+
+        if (date) {
+            filter.attendanceDate = normalizeDate(date);
+        }
+
+        const attendances = await Attendance.find(filter)
+            .populate("studentId", "username displayName DisplayName email phone")
+            .populate({
+                path: "courseSectionId",
+                select: "code name",
+                populate: [
+                    {
+                        path: "subjectId",
+                        select: "code name credits"
+                    },
+                    {
+                        path: "semesterId",
+                        select: "name"
+                    },
+                    {
+                        path: "roomId",
+                        select: "code name building"
+                    }
+                ]
+            })
+            .sort({ attendanceDate: -1, createdAt: -1 });
+
+        return res.status(200).json({
+            success: true,
+            message: "Lấy lịch sử điểm danh của giảng viên thành công",
+            count: attendances.length,
+            data: attendances
+        });
+
+    } catch (error) {
+        console.error("getMyAttendances:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi hệ thống"
+        });
+    }
+};
+
+export const getTeacherSchedule = async (req, res) => {
+    try {
+        const teacherId = req.user.id || req.user._id;
+
+        const courseSections = await CourseSection.find({
+            teacherId,
+            isDeleted: false,
+            isActive: true
+        })
+            .populate("subjectId", "code name credits")
+            .populate("semesterId", "name")
+            .populate("roomId", "code name building")
+            .sort({ createdAt: -1 });
+
+        const schedule = [];
+
+        for (const courseSection of courseSections) {
+            if (!Array.isArray(courseSection.schedules)) {
+                continue;
+            }
+
+            for (const item of courseSection.schedules) {
+                schedule.push({
+                    courseSection: {
+                        id: courseSection._id,
+                        code: courseSection.code,
+                        name: courseSection.name
+                    },
+                    subject: courseSection.subjectId || null,
+                    semester: courseSection.semesterId || null,
+                    room: courseSection.roomId || null,
+                    dayOfWeek: item.dayOfWeek,
+                    startTime: item.startTime,
+                    endTime: item.endTime
+                });
+            }
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Lấy lịch dạy của giảng viên thành công",
+            count: schedule.length,
+            data: schedule
+        });
+
+    } catch (error) {
+        console.error("getTeacherSchedule:", error);
 
         return res.status(500).json({
             success: false,

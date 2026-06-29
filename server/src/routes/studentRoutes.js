@@ -5,7 +5,8 @@ import {
     getStudentCourseSections,
     getStudentGrades,
     getStudentTranscript,
-    getAvailableCourseSections
+    getAvailableCourseSections,
+    getStudentSchedule
 } from "../controllers/studentController.js";
 
 import { protectedRoute } from "../middlewares/authenticateMiddleware.js";
@@ -48,4 +49,10 @@ router.get(
     getAvailableCourseSections
 );
 
+router.get(
+    "/my-schedule",
+    protectedRoute,
+    authorize("student"),
+    getStudentSchedule
+);
 export default router;

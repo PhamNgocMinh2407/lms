@@ -7,7 +7,9 @@ import {
     updateCourseSection,
     deleteCourseSection,
     lockCourseSection,
-    unlockCourseSection
+    unlockCourseSection,
+    openCourseSectionRegistration,
+    closeCourseSectionRegistration
 } from "../controllers/courseSectionController.js";
 
 import { protectedRoute } from "../middlewares/authenticateMiddleware.js";
@@ -63,5 +65,17 @@ router.patch(
     authorize("admin", "pdt"),
     unlockCourseSection
 );
+router.patch(
+    "/:id/open-registration",
+    protectedRoute,
+    authorize("admin", "pdt"),
+    openCourseSectionRegistration
+);
 
+router.patch(
+    "/:id/close-registration",
+    protectedRoute,
+    authorize("admin", "pdt"),
+    closeCourseSectionRegistration
+);
 export default router;

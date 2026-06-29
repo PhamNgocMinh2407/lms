@@ -48,10 +48,17 @@ export const createEnrollment = async (req, res) => {
             isActive: true
         });
 
+       
         if (!courseSection) {
             return res.status(404).json({
                 success: false,
                 message: "Không tìm thấy lớp học phần hợp lệ"
+            });
+        }
+         if (courseSection.registrationStatus !== "open") {
+            return res.status(400).json({
+                success: false,
+                message: "Lớp học phần chưa mở đăng ký"
             });
         }
 

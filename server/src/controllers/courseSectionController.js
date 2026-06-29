@@ -402,3 +402,103 @@ export const unlockCourseSection = async (req, res) => {
         return res.status(500).json({ success: false, message: "Lỗi hệ thống" });
     }
 };
+
+export const openCourseSectionRegistration = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "ID lớp học phần không hợp lệ"
+            });
+        }
+
+        const courseSection = await CourseSection.findOne({
+            _id: id,
+            isDeleted: false
+        });
+
+        if (!courseSection) {
+            return res.status(404).json({
+                success: false,
+                message: "Không tìm thấy lớp học phần"
+            });
+        }
+
+        if (courseSection.registrationStatus === "open") {
+            return res.status(400).json({
+                success: false,
+                message: "Lớp học phần đã mở đăng ký"
+            });
+        }
+
+        courseSection.registrationStatus = "open";
+
+        await courseSection.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Mở đăng ký lớp học phần thành công",
+            data: courseSection
+        });
+
+    } catch (error) {
+        console.error("openCourseSectionRegistration:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi hệ thống"
+        });
+    }
+};
+
+export const closeCourseSectionRegistration = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "ID lớp học phần không hợp lệ"
+            });
+        }
+
+        const courseSection = await CourseSection.findOne({
+            _id: id,
+            isDeleted: false
+        });
+
+        if (!courseSection) {
+            return res.status(404).json({
+                success: false,
+                message: "Không tìm thấy lớp học phần"
+            });
+        }
+
+        if (courseSection.registrationStatus === "closed") {
+            return res.status(400).json({
+                success: false,
+                message: "Lớp học phần đã đóng đăng ký"
+            });
+        }
+
+        courseSection.registrationStatus = "closed";
+
+        await courseSection.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Đóng đăng ký lớp học phần thành công",
+            data: courseSection
+        });
+
+    } catch (error) {
+        console.error("closeCourseSectionRegistration:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi hệ thống"
+        });
+    }
+};

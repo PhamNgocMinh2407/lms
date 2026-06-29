@@ -289,3 +289,81 @@ export const getAvailableCourseSections = async (req, res) => {
         });
     }
 };
+
+export const getStudentSchedule = async (req, res) => {
+    try {
+        const studentId = req.user.id || req.user._id;
+
+        const enrollments = await Enrollment.find({
+            studentId,
+            isDeleted: false,
+            status: "enrolled"
+        })
+            .populate({
+                path: "courseSectionId",
+                select: "code name schedules",
+                populate: [
+                    {
+                        path: "subjectId",
+                        select: "code name credits"
+                    },
+                    {
+                        path: "teacherId",
+                        select: "username displayName DisplayName email"
+                    },
+                    {
+                        path: "semesterId",
+                        select: "name"
+                    },
+                    {
+                        path: "roomId",
+                        select: "code name building"
+                    }
+                ]
+            })
+            .sort({ createdAt: -1 });
+
+        const schedule = [];
+
+        for (const enrollment of enrollments) {
+            const courseSection = enrollment.courseSectionId;
+
+            if (!courseSection || !Array.isArray(courseSection.schedules)) {
+                continue;
+            }
+
+            for (const item of courseSection.schedules) {
+                schedule.push({
+                    enrollmentId: enrollment._id,
+                    courseSection: {
+                        id: courseSection._id,
+                        code: courseSection.code,
+                        name: courseSection.name
+                    },
+                    subject: courseSection.subjectId || null,
+                    teacher: courseSection.teacherId || null,
+                    semester: courseSection.semesterId || null,
+                    room: courseSection.roomId || null,
+                    dayOfWeek: item.dayOfWeek,
+                    startTime: item.startTime,
+                    endTime: item.endTime
+                });
+            }
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Lấy lịch học của sinh viên thành công",
+            count: schedule.length,
+            data: schedule
+        });
+
+    } catch (error) {
+        console.error("getStudentSchedule:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi hệ thống"
+        });
+    }
+};

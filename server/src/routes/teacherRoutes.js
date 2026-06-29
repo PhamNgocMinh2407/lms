@@ -5,7 +5,9 @@ import {
     getMyCourseSections,
     getMyStudents,
     getMyGrades,
-    getMySubjectProposals
+    getMySubjectProposals,
+    getMyAttendances,
+    getTeacherSchedule
 } from "../controllers/teacherController.js";
 
 import { protectedRoute } from "../middlewares/authenticateMiddleware.js";
@@ -44,5 +46,17 @@ router.get(
     protectedRoute,
     authorize("teacher"),
     getMySubjectProposals
+);
+router.get(
+    "/my-attendances",
+    protectedRoute,
+    authorize("teacher"),
+    getMyAttendances
+);
+router.get(
+    "/my-schedule",
+    protectedRoute,
+    authorize("teacher"),
+    getTeacherSchedule
 );
 export default router;

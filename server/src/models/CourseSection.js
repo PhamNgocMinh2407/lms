@@ -45,6 +45,38 @@ const courseSectionSchema = new mongoose.Schema(
             default: 40,
             min: 1
         },
+        registrationStatus: {
+            type: String,
+            enum: ["open", "closed"],
+            default: "closed"
+        },
+        schedules: [
+    {
+        dayOfWeek: {
+            type: String,
+            enum: [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            ],
+            required: true
+        },
+
+        startTime: {
+            type: String,
+            required: true
+        },
+
+        endTime: {
+            type: String,
+            required: true
+        }
+    }
+],
 
         description: {
             type: String,

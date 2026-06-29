@@ -23,6 +23,8 @@ import tbmRoutes from "./routes/tbmRoutes.js";
 import htRoutes from "./routes/htRoutes.js";
 import pdtRoutes from "./routes/pdtRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
+import attendanceRoutes from "./routes/attendanceRoutes.js";
+import adminDashboardRoutes from "./routes/adminDashboardRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -45,8 +47,8 @@ app.use(express.json());
 
 
 app.use(cors({
-    origin: "http://localhost:5173", // Cho phép Frontend Vite của bạn truy cập
-    credentials: true,               // Bắt buộc để trình duyệt chịu lưu Cookie (refreshToken) giống Postman
+    origin: "http://localhost:5173",
+    credentials: true,              
     methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -77,6 +79,8 @@ app.use("/api/tbms", tbmRoutes);
 app.use("/api/pdts", pdtRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/hts", htRoutes);
+app.use("/api/attendances", attendanceRoutes);
+app.use("/api/admins", adminDashboardRoutes);
 
 // private routes
 

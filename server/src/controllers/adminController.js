@@ -385,11 +385,7 @@ export const deleteUser = async (req, res) => {
 
     }
 };
-
-
-
-
-
+    
 export const lockUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -478,6 +474,7 @@ export const unlockUser = async (req, res) => {
         });
     }
 };
+
 export const changeRole = async (req, res) => {
     try {
         const { id } = req.params;
@@ -551,6 +548,7 @@ export const changeRole = async (req, res) => {
         });
     }
 };
+
 export const resetUserPassword = async (req, res) => {
     try {
         const { id } = req.params;
